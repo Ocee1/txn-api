@@ -9,7 +9,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { IRoutes } from './interfaces/routes.interface';
 import mongoose from 'mongoose';
-import { corsOptions, MONGO_URI } from './config/config';
+import { corsOptions, MONGO_URI, NODE_ENV, PORT } from './config/config';
 import errorMiddleware from './middlewares/error';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from './swagger_output.json';
@@ -23,8 +23,8 @@ class App {
   public port: string | number;
   constructor(routes: IRoutes[]) {
     this.app = express();
-    this.env = process.env.NODE_ENV || 'development';
-    this.port = 4000;
+    this.env = NODE_ENV|| 'development';
+    this.port = PORT;
 
     this.initializeMiddlewares();
     this.initalizeErrorHandling();

@@ -12,6 +12,7 @@ export const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 export const MONGO_URI = process.env.MONGO_URI;
 export const RMQ_URL = process.env.RMQ_URL;
 export const RMQ_PORT = process.env.RMQ_PORT;
+export const NODE_ENV = process.env.NODE_ENV;
 
 export const corsOptions = {
   origin: '*', 

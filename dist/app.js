@@ -47,8 +47,8 @@ class App {
     port;
     constructor(routes) {
         this.app = (0, express_1.default)();
-        this.env = process.env.NODE_ENV || 'development';
-        this.port = 4000;
+        this.env = config_1.NODE_ENV || 'development';
+        this.port = config_1.PORT;
         this.initializeMiddlewares();
         this.initalizeErrorHandling();
         this.initializeRoutes(routes);
