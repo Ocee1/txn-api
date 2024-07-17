@@ -13,6 +13,13 @@ export const MONGO_URI = process.env.MONGO_URI;
 export const RMQ_URL = process.env.RMQ_URL;
 export const RMQ_PORT = process.env.RMQ_PORT;
 
+export const corsOptions = {
+  origin: '*', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+  allowedHeaders: 'Content-Type,Authorization', 
+  credentials: true, 
+};
+
 
 export const SERVER = {
   SERVER_HOSTNAME,

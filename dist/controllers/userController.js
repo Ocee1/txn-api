@@ -35,6 +35,12 @@ class UserController {
         }
     };
     loginUser = async (req, res, next) => {
+        /**
+        #swagger.requestBody = {
+            required: true,
+            schema: { $ref: "#/components/schemas/loginUser" }
+        }
+         */
         const { body } = req;
         try {
             const { error } = this.userValidation.loginValidation(body);

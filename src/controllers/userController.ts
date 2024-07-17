@@ -39,6 +39,12 @@ class UserController {
     }
   }
   public loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    /**
+    #swagger.requestBody = {
+        required: true,
+        schema: { $ref: "#/components/schemas/loginUser" }
+    }
+     */
     const { body } = req;
 
     try {

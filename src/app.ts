@@ -9,8 +9,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { IRoutes } from './interfaces/routes.interface';
 import mongoose from 'mongoose';
-import { MONGO_URI } from './config/config';
+import { corsOptions, MONGO_URI } from './config/config';
 import errorMiddleware from './middlewares/error';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOutput from './swagger_output.json';
 // import mqConnection from './services/rmq/rabbit';
 
 
@@ -47,9 +49,7 @@ class App {
   public initializeMiddlewares() {
     this.app.use(morgan('common', { stream }));
 
-    this.app.use(cors({
-      credentials: true,
-    }));
+    this.app.use(cors(corsOptions));
     this.app.use(helmet());
     this.app.use(hpp());
 
@@ -57,6 +57,7 @@ class App {
     this.app.use(cookieParser());
     this.app.use(json({ limit: '25mb' }));
     this.app.use(urlencoded({ extended: true }));
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
   }
 

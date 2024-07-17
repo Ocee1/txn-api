@@ -38,6 +38,8 @@ const helmet_1 = __importDefault(require("helmet"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = require("./config/config");
 const error_1 = __importDefault(require("./middlewares/error"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_output_json_1 = __importDefault(require("./swagger_output.json"));
 // import mqConnection from './services/rmq/rabbit';
 class App {
     app;
@@ -66,15 +68,14 @@ class App {
     }
     initializeMiddlewares() {
         this.app.use((0, morgan_1.default)('common', { stream: logger_1.stream }));
-        this.app.use((0, cors_1.default)({
-            credentials: true,
-        }));
+        this.app.use((0, cors_1.default)(config_1.corsOptions));
         this.app.use((0, helmet_1.default)());
         this.app.use((0, hpp_1.default)());
         this.app.use((0, compression_1.default)());
         this.app.use((0, cookie_parser_1.default)());
         this.app.use((0, express_1.json)({ limit: '25mb' }));
         this.app.use((0, body_parser_1.urlencoded)({ extended: true }));
+        this.app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default));
     }
     initializeRoutes(routes) {
         routes.forEach(route => {
