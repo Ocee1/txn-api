@@ -12,8 +12,8 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:4080',
-            description: ''
+            url: 'http://localhost:4000',
+            description: 'Development'
         },
     ],
     components: {
