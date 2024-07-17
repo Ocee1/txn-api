@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\DELL\\Documents\\Projects\\txn-api\\src\\utils\\logs\\debug\\.c7d521c55943a4977b0cc474034fb3719e2a33a0-audit.json",
+    "files": [
+        {
+            "date": 1721064715306,
+            "name": "C:\\Users\\DELL\\Documents\\Projects\\txn-api\\src\\utils\\logs\\debug\\2024-07-15.log",
+            "hash": "d7a1f998c622c6b85be1a1dd2c929e1289cf0d6bafa83b3f7c55360f1609a26f"
+        },
+        {
+            "date": 1721115723922,
+            "name": "C:\\Users\\DELL\\Documents\\Projects\\txn-api\\src\\utils\\logs\\debug\\2024-07-16.log",
+            "hash": "65c2874dc08a20af2d496948a577ac4b72b2ac8802170c6c7474e8a9f6f21e6b"
+        }
+    ],
+    "hashType": "sha256"
+}
