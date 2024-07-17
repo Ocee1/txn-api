@@ -16,7 +16,6 @@ class UserController {
 
 
     try {
-      // await console.log('thisssss:  ', this.userValidation.signupValidation(body))
       const { error } = this.userValidation.signupValidation(body);
 
       if (error) return this.appResponse.badRequest(res, { error: { message: error.message } });
@@ -39,12 +38,7 @@ class UserController {
     }
   }
   public loginUser = async (req: Request, res: Response, next: NextFunction) => {
-    /**
-    #swagger.requestBody = {
-        required: true,
-        schema: { $ref: "#/components/schemas/loginUser" }
-    }
-     */
+  
     const { body } = req;
 
     try {

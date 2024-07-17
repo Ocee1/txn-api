@@ -7,9 +7,6 @@ import { LOG_DIR } from '../config/config';
 
 const logDir: string = join(__dirname, LOG_DIR);
 
-// if (!existsSync(logDir)) {
-//     mkdirSync(logDir);
-// }
 
 const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
 

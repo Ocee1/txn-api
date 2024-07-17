@@ -96,7 +96,7 @@ class TransactionController {
       const { startDate, endDate } = query as { startDate: string, endDate: string };
       const userId = user.id;
 
-      // Validate dates (ensure they are valid ISO date strings)
+      
       if (!startDate || !endDate || !moment(startDate, moment.ISO_8601, true).isValid() || !moment(endDate, moment.ISO_8601, true).isValid()) {
         return this.response.badRequest(res, { message: 'Invalid date range. Please provide valid ISO date strings for startDate and endDate.' });
       }

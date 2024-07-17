@@ -9,7 +9,7 @@ interface DecodedToken extends JwtPayload {
 
 class Auth {
   constructor() { }
-  // private token = (req: Request) => req.headers['x-auth-token'];
+  
 
   public authorize = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');

@@ -40,7 +40,6 @@ const config_1 = require("./config/config");
 const error_1 = __importDefault(require("./middlewares/error"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_output_json_1 = __importDefault(require("./swagger_output.json"));
-// import mqConnection from './services/rmq/rabbit';
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 class App {
     app;
@@ -83,19 +82,6 @@ class App {
             this.app.use('/api', route.router);
         });
     }
-    // private async connectRMQ() {
-    //   try {
-    //     await mqConnection.connectRabbitMQ();
-    //     logger.info('======================');
-    //     logger.info('RabbitMQ Connected:');
-    //     logger.info('======================');
-    //   } catch (error) {
-    //     logger.error('======================');
-    //     logger.error('Failed to connect to RabbitMQ: ', error);
-    //     logger.error('======================')
-    //     console.error('Failed to connect to RabbitMQ', error);
-    //   }
-    // }
     async initializaDB() {
         try {
             const connection = await mongoose_1.default.connect(config_1.MONGO_URI);

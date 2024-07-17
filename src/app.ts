@@ -13,7 +13,7 @@ import { corsOptions, MONGO_URI, NODE_ENV, PORT } from './config/config';
 import errorMiddleware from './middlewares/error';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from './swagger_output.json';
-// import mqConnection from './services/rmq/rabbit';
+
 
 
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
@@ -67,19 +67,7 @@ class App {
     });
   }
 
-  // private async connectRMQ() {
-  //   try {
-  //     await mqConnection.connectRabbitMQ();
-  //     logger.info('======================');
-  //     logger.info('RabbitMQ Connected:');
-  //     logger.info('======================');
-  //   } catch (error) {
-  //     logger.error('======================');
-  //     logger.error('Failed to connect to RabbitMQ: ', error);
-  //     logger.error('======================')
-  //     console.error('Failed to connect to RabbitMQ', error);
-  //   }
-  // }
+  
 
   private async initializaDB() {
     try {

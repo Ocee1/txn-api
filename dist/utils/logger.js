@@ -8,9 +8,6 @@ const path_1 = require("path");
 const winston_1 = __importDefault(require("winston"));
 const config_1 = require("../config/config");
 const logDir = (0, path_1.join)(__dirname, config_1.LOG_DIR);
-// if (!existsSync(logDir)) {
-//     mkdirSync(logDir);
-// }
 const logFormat = winston_1.default.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
 const logger = winston_1.default.createLogger({
     transports: [

@@ -7,7 +7,6 @@ const user_1 = __importDefault(require("../models/user"));
 const encrypt_utils_1 = __importDefault(require("../utils/encrypt.utils"));
 class Auth {
     constructor() { }
-    // private token = (req: Request) => req.headers['x-auth-token'];
     authorize = async (req, res, next) => {
         const token = req.header('Authorization')?.replace('Bearer ', '');
         if (!token)

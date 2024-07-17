@@ -74,7 +74,7 @@ class TransactionService {
       { $sort: { _id: 1 } }
     ]);
 
-    // Format data for charting library
+   
     const chartData = aggregatedData.map((item: any) => ({
       date: item._id,
       volume: item.totalVolume
