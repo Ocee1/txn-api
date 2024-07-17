@@ -49,7 +49,7 @@ class App {
   public initializeMiddlewares() {
     this.app.use(morgan('common', { stream }));
 
-    this.app.use(cors(corsOptions));
+    this.app.use(cors());
     this.app.use(helmet());
     this.app.use(hpp());
 
