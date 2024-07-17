@@ -44,7 +44,6 @@ class UserController {
             if (!isUser)
                 return this.appResponse.badRequest(res, 'Invalid login credentials');
             const validPassword = await encrypt_utils_1.default.compareStrings(isUser.password, body.password);
-            console.log('passssssssssss:', validPassword);
             if (!validPassword)
                 return this.appResponse.badRequest(res, 'Invalid login credentials');
             const accessToken = await encrypt_utils_1.default.encrypt({ id: isUser.id, email: isUser.email });
