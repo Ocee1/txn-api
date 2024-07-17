@@ -15,6 +15,10 @@ const doc = {
             url: 'http://localhost:4000',
             description: 'Development'
         },
+        {
+            "url": "https://txn-api.vercel.app",
+            "description": "Production"
+        },
     ],
     components: {
         securitySchemes: {
