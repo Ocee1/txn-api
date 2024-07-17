@@ -41,6 +41,7 @@ const error_1 = __importDefault(require("./middlewares/error"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_output_json_1 = __importDefault(require("./swagger_output.json"));
 // import mqConnection from './services/rmq/rabbit';
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 class App {
     app;
     env;
@@ -75,7 +76,7 @@ class App {
         this.app.use((0, cookie_parser_1.default)());
         this.app.use((0, express_1.json)({ limit: '25mb' }));
         this.app.use((0, body_parser_1.urlencoded)({ extended: true }));
-        this.app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default));
+        this.app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default, { customCssUrl: CSS_URL }));
     }
     initializeRoutes(routes) {
         routes.forEach(route => {

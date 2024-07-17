@@ -11,15 +11,15 @@ class Auth {
     authorize = async (req, res, next) => {
         const token = req.header('Authorization')?.replace('Bearer ', '');
         if (!token)
-            return res.status(403).send('provide an authorization token');
+            return res.status(403).send({ error: 'Unauthorised User' });
         if (typeof token !== 'string')
-            return res.status(403).send('provide a valid authorization header token');
+            return res.status(403).send({ error: { message: 'Invalid Authorization token' } });
         try {
             const decodeToken = await encrypt_utils_1.default.decrypt(token);
             const id = decodeToken.id;
             const user1 = await user_1.default.findById(id);
             if (!user1)
-                return res.status(403).send('User not authorized');
+                return res.status(403).send({ error: { message: 'User not authorized' } });
             req.user = user1;
             next();
         }

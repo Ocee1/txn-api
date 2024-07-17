@@ -16,7 +16,7 @@ import swaggerOutput from './swagger_output.json';
 // import mqConnection from './services/rmq/rabbit';
 
 
-
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 class App {
   public app: Application;
   public env: string;
@@ -57,7 +57,7 @@ class App {
     this.app.use(cookieParser());
     this.app.use(json({ limit: '25mb' }));
     this.app.use(urlencoded({ extended: true }));
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput, { customCssUrl: CSS_URL }));
 
   }
 
