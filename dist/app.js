@@ -48,7 +48,7 @@ class App {
     constructor(routes) {
         this.app = (0, express_1.default)();
         this.env = config_1.NODE_ENV || 'development';
-        this.port = config_1.PORT;
+        this.port = config_1.PORT || 4000;
         this.initializeMiddlewares();
         this.initalizeErrorHandling();
         this.initializeRoutes(routes);
@@ -68,7 +68,7 @@ class App {
     }
     initializeMiddlewares() {
         this.app.use((0, morgan_1.default)('common', { stream: logger_1.stream }));
-        this.app.use((0, cors_1.default)(config_1.corsOptions));
+        this.app.use((0, cors_1.default)());
         this.app.use((0, helmet_1.default)());
         this.app.use((0, hpp_1.default)());
         this.app.use((0, compression_1.default)());

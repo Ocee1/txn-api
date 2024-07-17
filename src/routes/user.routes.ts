@@ -16,7 +16,7 @@ class UserRouter implements IRoutes {
 
   private initializeRoutes() {
     this.router.post(`/auth/signup`, this.userController.createUser);
-    this.router.post(`auth/signin`, this.userController.loginUser);
+    this.router.post(`/auth/signin`, this.userController.loginUser);
     this.router.get(`/profile`, this.auth.authorize, this.userController.getUserProfile);
     this.router.patch(`/profile`, this.auth.authorize, this.userController.updateUserProfile);
     this.router.delete(`/profile`, this.auth.authorize, this.userController.deleteUser);

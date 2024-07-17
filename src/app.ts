@@ -24,7 +24,7 @@ class App {
   constructor(routes: IRoutes[]) {
     this.app = express();
     this.env = NODE_ENV|| 'development';
-    this.port = PORT;
+    this.port = PORT || 4000;
 
     this.initializeMiddlewares();
     this.initalizeErrorHandling();
