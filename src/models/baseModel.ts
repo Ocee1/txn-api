@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import knex from 'config/db';
+import knexCon from '../config/db';
 
-Model.knex(knex);
+Model.knex(knexCon);
 export default class BaseModel extends Model{};
