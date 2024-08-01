@@ -13,6 +13,11 @@ export const MONGO_URI = process.env.MONGO_URI;
 export const RMQ_URL = process.env.RMQ_URL;
 export const RMQ_PORT = process.env.RMQ_PORT;
 export const NODE_ENV = process.env.NODE_ENV;
+export const DATABASE_HOST = process.env.DATABASE_HOST;
+export const DATABASE_USER = process.env.DATABASE_USER;
+export const DATABASE_NAME = process.env.DATABASE_NAME;
+export const DATABASE_PASSWORD = process.env.PASSWORD;
+
 
 export const corsOptions = {
   origin: '*', 

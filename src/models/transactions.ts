@@ -1,38 +1,32 @@
-import { Schema, model, Document } from 'mongoose';
+import { Model } from "objection";
 
-export interface ITransaction extends Document {
-  user_id: string;
-  amount: number;
-  transaction_type: 'credit' | 'debit';
-  description: string;
-  timestamp: Date;
-}
+export class Transaction extends Model {
+  static tableName = 'transactions';
 
-const transactionSchema = new Schema<ITransaction>({
-  user_id: {
-    type: String,
-    required: true
-  },
+  id!: number;
+  userId!: string;
+  amount!: number;
+  transactionType!: 'credit' | 'debit';
+  description?: string;
+  timestamp!: Date;
 
-  amount: {
-    type: Number,
-    required: true
-  },
+  static get columnNameMappers() {
+    return {
+      parseDataBaseJson: (json: any) => {
+        json.userId = json.user_id;
+        json.transactionType = json.transaction_type;
+        delete json.user_id;
+        delete json.transaction_type;
+        return json;
+      },
 
-  transaction_type: {
-    type: String,
-    enum: ['credit', 'debit'],
-    required: true
-  },
-  description: {
-    type: String,
-  },
-  timestamp: {
-    type: Date,
-    default: Date.now
+      formatDataBaseJson: (json: any) => {
+        json.user_id = json.userId;
+        json.transaction_type = json.transactionType;
+        delete json.userId;
+        delete json.transactionType;
+        return json;
+      },
+    } as any;
   }
-});
-
-
-
-export default model<ITransaction>('Transaction', transactionSchema);
+}

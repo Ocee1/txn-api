@@ -1,4 +1,4 @@
-import User, { IUser } from "../models/user";
+import User from "../models/user";
 
 class UserService {
   constructor() {}
@@ -6,27 +6,27 @@ class UserService {
   protected model = User;
 
   public createUser = async (data: any) => {
-    const result = await this.model.create(data);
+    const result = await this.model.query().insert(data);
     return result;
   };
 
   public getUserById = async (id: string) => {
-    const user = (await this.model.findById(id)).isSelected('-password');
+    const user = await this.model.query().findById(id);
     return user;
   }
 
   public getUserByEmail = async (email: string) => {
-    const user: IUser | null = (await this.model.findOne({ email }));
+    const user: User | null = (await this.model.query().where({ email }).first());
     return user;
   };
 
-  public findByIdAndUpdate = async (data: any, id: string) => {
-    const user = await this.model.findByIdAndUpdate(id, data, { upsert: false });
+  public findByIdAndUpdate = async (data: Partial<User>, id: string) => {
+    const user = await this.model.query().patchAndFetchById(id, data);
     return user;
   };
 
   public removeUser = async (id: string) => {
-    const user = await this.model.findByIdAndDelete(id);
+    const user = await this.model.query().deleteById(+id);
     return user;
   };
 }

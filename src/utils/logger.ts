@@ -5,7 +5,7 @@ import winstonDaily from 'winston-daily-rotate-file';
 import { LOG_DIR } from '../config/config';
 
 
-const logDir: string = join(__dirname, LOG_DIR);
+const logDir: string = join(__dirname, 'LOG_DIR');
 
 
 const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);

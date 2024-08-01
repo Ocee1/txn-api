@@ -1,5 +1,5 @@
 import { JwtPayload } from 'jsonwebtoken';
-import User, { IUser } from '../models/user';
+import User from '../models/user';
 import Crypto from '../utils/encrypt.utils';
 import { NextFunction, Request, Response } from 'express';
 
@@ -22,7 +22,7 @@ class Auth {
       const decodeToken = await Crypto.decrypt(token);
 
       const id = (decodeToken as JwtPayload).id
-      const user1 = await User.findById(id);
+      const user1 = await User.query().findById(id);
 
       if (!user1) return res.status(403).send({error: { message: 'User not authorized'}});
 

@@ -1,4 +1,5 @@
-import { Document, model, Schema } from "mongoose";
+import { Model } from "objection"
+
 
 export interface IUser extends Document {
   firstName: string,
@@ -7,32 +8,40 @@ export interface IUser extends Document {
   password: string
 }
 
-const schema = new Schema(
-  {
-    firstName: {
-      type: String,
-      minLength: 1,
-      maxLength: 30
-    },
+class User extends Model {
+  static tableName = 'users';
+  id!: string;
+  firstName?: string;
+  lastName?: string;
+  email!: string;
+  password!: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 
-    lastName: {
-      type: String,
-      minLength: 1,
-      maxLength: 30
-    },
+  static get columnNameMappers() {
+    return {
+      parseDatabaseJson: (json: any) => {
+        if (json.created_at) {
+          json.createdAt = new Date(json.created_at);
+        }
+        if (json.updated_at) {
+          json.updatedAt = new Date(json.updated_at);
+        }
+        return json;
+      },
+      formatDatabaseJson: (json: any) => {
+        if (json.createdAt) {
+          json.created_at = json.createdAt.toISOString();
+        }
+        if (json.updatedAt) {
+          json.updated_at = json.updatedAt.toISOString();
+        }
+        return json;
+      },
+    } as any; 
+  }
 
-    email: {
-      type: String,
-      required: true,
-      minLength: 5,
-    },
+}
 
-    password: {
-      type: String,
-      required: true
-    },
 
-  }, { timestamps: true, toJSON: { virtuals: true } }
-)
-
-export default model<IUser>('User', schema)
+export default User;

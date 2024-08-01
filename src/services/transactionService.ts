@@ -1,18 +1,18 @@
-import Transaction from "../models/transactions";
+import { Transaction } from "../models/transactions";
 
 class TransactionService {
   protected model = Transaction;
 
   public createTransaction = async (data: any) => {
-    return await this.model.create(data);
+    return await this.model.query().insert(data);
   }
 
   public getTransactions = async (userId: string, page: number, limit: number) => {
     const skip = (page - 1) * limit;
-    const transactions = await Transaction.find({ user_id: userId })
-      .skip(skip)
+    const transactions = await this.model.query()
+      .offset(skip)
       .limit(limit);
-    const totalDocuments = await Transaction.countDocuments({ user_id: userId });
+    const totalDocuments = await this.model.query().where('userId', userId).resultSize();
     return {
       transactions,
       totalPages: Math.ceil(totalDocuments / limit),
@@ -22,25 +22,25 @@ class TransactionService {
 
 
   public getTransactionById = async (userId: string, id: string) => {
-    return await Transaction.findById({ _id: id, user_id: userId });
+    return await this.model.query().findOne({ id, userId });
   }
 
   public updateTransaction = async (userId: string, id: string, data: any) => {
-    return await this.model.findByIdAndUpdate({ _id: id, user_id: userId }, data, { new: true });
+    return await this.model.query().patchAndFetchById(id, { ...data, userId });
   }
 
   public deleteTransaction = async (userId: string, id: string) => {
-    return await Transaction.findByIdAndDelete({ _id: id, user_id: userId });
+    return await this.model.query().delete().where({ id, userId });
   }
 
   public getTransactionSummary = async (userId: string) => {
-    const transactions = await Transaction.find({ user_id: userId });
+    const transactions = await this.model.query().where('userId', userId);
 
     const summary = transactions.reduce(
       (acc, transaction) => {
-        if (transaction.transaction_type === 'credit') {
+        if (transaction.transactionType === 'credit') {
           acc.totalCredits += transaction.amount;
-        } else if (transaction.transaction_type === 'debit') {
+        } else if (transaction.transactionType === 'debit') {
           acc.totalDebits += transaction.amount;
         }
         return acc;
@@ -58,23 +58,15 @@ class TransactionService {
   }
 
   public getHistoricalTransactionVolume = async (userId: string, startDate: Date, endDate: Date) => {
-    const aggregatedData = await this.model.aggregate([
-      {
-        $match: {
-          user_id: userId,
-          timestamp: { $gte: startDate, $lt: endDate }
-        }
-      },
-      {
-        $group: {
-          _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
-          totalVolume: { $sum: "$amount" }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
+    const aggregatedData = await this.model.query()
+      .where('userId', userId)
+      .andWhere('timestamp', '>=', startDate)
+      .andWhere('timestamp', '<', endDate)
+      .select(this.model.raw('DATE(timestamp) as date'))
+      .sum('amount as totalVolume')
+      .groupBy('date')
+      .orderBy('date', 'asc');
 
-   
     const chartData = aggregatedData.map((item: any) => ({
       date: item._id,
       volume: item.totalVolume

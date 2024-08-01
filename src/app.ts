@@ -30,7 +30,7 @@ class App {
     this.initalizeErrorHandling();
     this.initializeRoutes(routes);
     // this.connectRMQ();
-    this.initializaDB();
+    // this.initializaDB();
   }
 
   public listen() {
@@ -69,19 +69,19 @@ class App {
 
   
 
-  private async initializaDB() {
-    try {
-      const connection = await mongoose.connect(MONGO_URI)
-      logger.info('======================');
-      logger.info('MongoDB Connected:', connection.version);
-      logger.info('======================');
+  // private async initializaDB() {
+  //   try {
+  //     const connection = await mongoose.connect(MONGO_URI)
+  //     logger.info('======================');
+  //     logger.info('MongoDB Connected:', connection.version);
+  //     logger.info('======================');
 
-    } catch (error) {
-      logger.error('======================');
-      logger.error('Mongo Err: ', error);
-      logger.error('======================')
-    }
-  }
+  //   } catch (error) {
+  //     logger.error('======================');
+  //     logger.error('Mongo Err: ', error);
+  //     logger.error('======================')
+  //   }
+  // }
 
   private initalizeErrorHandling() {
     this.app.use(errorMiddleware);

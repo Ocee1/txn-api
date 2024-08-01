@@ -1,5 +1,5 @@
 // express.d.ts
-import { IUser } from '../models/user'; // Adjust the path to your user model
+import { IUser } from "interfaces/validation.interface";  // Adjust the path to your user model
 
 declare global {
   namespace Express {

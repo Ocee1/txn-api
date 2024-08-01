@@ -72,7 +72,7 @@ class TransactionController {
     try {
       const transaction = await this.transactionService.deleteTransaction(user.id, params.id);
       if (transaction) {
-        this.response.success(res, transaction);
+        this.response.success(res, 'transaction');
       } else {
         this.response.success(res, { error: { message: 'Transaction not found' } });
       }
