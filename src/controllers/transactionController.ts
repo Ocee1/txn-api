@@ -7,8 +7,8 @@ import moment from "moment";
 import UserService from "../services/userService";
 import { ATLAS_SECRET, atlasConfig, CREATE_TRANSFER_URL, GET_ACCOUNT_URL } from "../config/config";
 import axios from "axios";
-import { Transaction } from "models/transactions";
-import { Transfer } from "models/transfer";
+import { Transaction } from "../models/transactions";
+import { Transfer } from "../models/transfer";
 
 class TransactionController {
   protected transactionService = new TransactionService();

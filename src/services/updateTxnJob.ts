@@ -9,10 +9,6 @@ import axios from 'axios';
 import { Transfer } from '../models/transfer';
 
 
-const knexConfig = require('./knexfile'); // Adjust the path to your knexfile
-const knex = Knex(knexConfig.development);
-Model.knex(knex);
-
 cron.schedule('* * * * *', async () => {
   console.log('Running a task every minute');
 
