@@ -23,6 +23,19 @@ class UserValidationSchema {
     });
     return schema.validate(data);
   }
+
+  public transactionPinValidation = (data: string) => {
+    const schema = Joi.object({
+      transactionPin: Joi.string().pattern(/^\d{4}$/)
+      .required()
+      .messages({
+        'string.base': 'Transaction pin should be a string',
+        'string.pattern.base': 'Transaction pin must be a 4-digit number',
+        'any.required': 'Transaction pin is required'
+      })
+    })
+    return schema.validate(data)
+  }
 }
 
 export default UserValidationSchema;

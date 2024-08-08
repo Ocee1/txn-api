@@ -13,6 +13,8 @@ import { corsOptions, MONGO_URI, NODE_ENV, PORT } from './config/config';
 import errorMiddleware from './middlewares/error';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from './swagger_output.json';
+import './services/reversalJob';
+import './services/updateTxnJob';
 
 
 

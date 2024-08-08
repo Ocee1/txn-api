@@ -3,13 +3,17 @@ import BaseModel from "./baseModel";
 
 export class Transaction extends Model {
   static tableName = 'transactions';
-
+// changed senderId and receiver and status
   id!: number;
-  userId!: string;
+  senderId!: string;
+  receiverId!: string;
   amount!: number;
+  status!: 'pending' | 'completed' | 'failed' | 'reversed';
   transactionType!: 'credit' | 'debit';
   description?: string;
-  timestamp!: Date;
-
-  
+  //changed updated at and createdAt
+  balanceBefore?: string;
+  balanceAfter?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
