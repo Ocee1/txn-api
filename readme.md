@@ -75,6 +75,7 @@ The Transaction API provides endpoints for user authentication and transaction m
 | Endpoint       | Method | Description                            | Request Body                                          | Responses                                                                                           |
 |----------------|--------|----------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | `/api/profile`     | GET    | Retrieves the user's profile           | None                                                  | `200 OK` - Profile retrieved successfully <br> `401 Unauthorized` - User not authenticated           |
+| `/api/create-transaction-pin`|  POST   | Retrieves the user's profile| ```json { "transactionPin": "5468" } ```              | `200 OK` - Transaction pin created successfully <br> `401 Unauthorized` - User not authenticated           |
 | `/api/profile`     | PATCH  | Updates the user's profile             | ```json { "firstName": "John", "lastName": "Doe" } ```| `200 OK` - Profile updated successfully <br> `400 Bad Request` - Validation errors <br> `401 Unauthorized` - User not authenticated |
 | `/api/profile`     | DELETE | Deletes the profile of the user        | None                                                  | `200 OK` - Profile deleted successfully <br> `401 Unauthorized` - User not authenticated            |
 

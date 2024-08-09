@@ -45,9 +45,12 @@ class TransactionController {
         balanceBefore: balance,
       }
 
-      const payload = {
-        status: 'pending',
-        balanceBefore: balance,
+      
+
+
+      const transaction = await this.transactionService.createTransaction(data);
+      const payload: Partial<Transfer> = {
+        transactionId: transaction.id.toString(),
         amount,
         bank: accountInfo.data.data,
         bank_code,
@@ -57,15 +60,8 @@ class TransactionController {
         reference,
         transactionType
       };
-
-      const result = await Transaction.transaction(async (txn) => {
-        const transaction = await this.transactionService.createTransaction(payload);
-
-        const transfer = await Transfer.query(txn).insert({
-          transactionId: transaction.id,
-          ...payload
-        });
-      })
+      
+      const transfer = await Transfer.query().insert(payload)
 
 
       this.response.created(res, 'Transaction created successfully');

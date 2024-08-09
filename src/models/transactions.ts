@@ -7,7 +7,7 @@ export class Transaction extends Model {
   id!: number;
   senderId!: string;
   receiverId!: string;
-  amount!: number;
+  amount!: string;
   status!: 'pending' | 'completed' | 'failed' | 'reversed';
   transactionType!: 'credit' | 'debit';
   description?: string;

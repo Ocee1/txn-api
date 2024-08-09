@@ -10,10 +10,10 @@ import { Transfer } from '../models/transfer';
 
 
 cron.schedule('* * * * *', async () => {
-  console.log('Running a task every minute');
+  console.log('Checking for pending transfers every minute');
 
   try {
-    const pendingTransactions = await Transfer.query().where({ status: 'pending'});
+    const pendingTransactions = await Transaction.query().where({ status: 'pending'});
 
     for (const transaction of pendingTransactions) {
       const transfer = await Transfer.query().findOne({ transactionId: transaction.id });

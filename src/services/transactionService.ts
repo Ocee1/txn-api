@@ -34,14 +34,14 @@ class TransactionService {
   }
 
   public getTransactionSummary = async (userId: string) => {
-    const transactions = await this.model.query().where('userId', userId);
+    const transactions = await this.model.query().where('senderId', userId).orWhere('receiverId', userId);
 
     const summary = transactions.reduce(
       (acc, transaction) => {
-        if (transaction.transactionType === 'credit') {
-          acc.totalCredits += transaction.amount;
-        } else if (transaction.transactionType === 'debit') {
-          acc.totalDebits += transaction.amount;
+        if (transaction.receiverId === userId) {
+          acc.totalCredits += ~~transaction.amount;
+        } else if (transaction.senderId === userId) {
+          acc.totalDebits += ~~transaction.amount;
         }
         return acc;
       },

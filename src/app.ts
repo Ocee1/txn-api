@@ -9,13 +9,12 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { IRoutes } from './interfaces/routes.interface';
 import mongoose from 'mongoose';
-import { corsOptions, MONGO_URI, NODE_ENV, PORT } from './config/config';
+import { corsOptions, DATABASE_PASSWORD, DATABASE_USER, MONGO_URI, NODE_ENV, PORT } from './config/config';
 import errorMiddleware from './middlewares/error';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from './swagger_output.json';
 import './services/reversalJob';
 import './services/updateTxnJob';
-
 
 
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
