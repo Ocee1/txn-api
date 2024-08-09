@@ -34,7 +34,13 @@ class TransactionService {
   }
 
   public getTransactionSummary = async (userId: string) => {
-    const transactions = await this.model.query().where('senderId', userId).orWhere('receiverId', userId);
+    const transactions = await this.model.query().where({
+      senderId: userId,
+      status: 'completed'
+    }).orWhere({
+      receierId: userId,
+      status: 'completed'
+    });
 
     const summary = transactions.reduce(
       (acc, transaction) => {
